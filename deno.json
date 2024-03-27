@@ -1,0 +1,10 @@
+{
+  "fmt": {
+    "lineWidth": 120,
+    "semiColons": false,
+    "singleQuote": true
+  },
+  "tasks": {
+    "i": "deno install --allow-net --allow-read mod.ts -f"
+  }
+}
