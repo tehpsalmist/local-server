@@ -1,6 +1,19 @@
 console.log('Starting up!')
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': '*',
+  'Access-Control-Allow-Headers': '*',
+}
+
 Deno.serve(async (req) => {
+  if (req.method === 'OPTIONS') {
+    return new Response(null, {
+      headers: corsHeaders,
+      status: 204,
+    })
+  }
+
   console.log('serving', req.url)
 
   const { pathname } = new URL(req.url)
@@ -18,5 +31,7 @@ Deno.serve(async (req) => {
     return new Response('Not Found', { status: 404 })
   }
 
-  return new Response(file.readable, { headers: { 'Access-Control-Allow-Origin': '*' } })
+  return new Response(file.readable, {
+    headers: corsHeaders,
+  })
 })
